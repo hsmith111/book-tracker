@@ -1,14 +1,14 @@
 import './App.css'
 import DoneReading from '../DoneReading/DoneReading';
 import ToBeRead from '../ToBeRead/ToBeRead';
-import ReadingNow from '../ReadingNow/ReadingNow';
+import CurrentlyReading from '../CurrentlyReading/CurrentlyReading';
 
 function App() {
   return (
     <>
       <h1>Book Tracker</h1>
       <div className='container'>
-        <ReadingNow />
+        <CurrentlyReading />
         <DoneReading />
         <ToBeRead />
       </div>

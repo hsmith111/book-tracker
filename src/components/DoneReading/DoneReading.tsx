@@ -1,7 +1,15 @@
+import './DoneReading.css';
+import BookCard from '../BookCard/BookCard';
+
 function DoneReading() {
     return (
-        <div className="box">
+        <div className="doneReading">
             <h2>Done</h2>
+            <BookCard />
+            <BookCard />
+            <BookCard />
+            <BookCard />
+            <BookCard />
         </div>
     )
 }

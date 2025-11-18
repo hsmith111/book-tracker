@@ -22,7 +22,8 @@ h1 {
 .container {
   display: flex;
   flex-direction: row; /* default: horizontal */
-  gap: 250px; /* optional spacing between components */
+  gap: 150px; /* optional spacing between components */
+  /* width: 300px; */
 }
 
 .box {

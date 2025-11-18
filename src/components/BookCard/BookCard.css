@@ -1,0 +1,14 @@
+.addBookButton, .removeBookButton {
+    background-color: lightgray;
+    font-weight: bold;
+    height: 40px;
+    margin-left: 20px;
+}
+
+.BookCardInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    /* text-align: left; */
+}
