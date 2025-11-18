@@ -1,0 +1,33 @@
+body {
+  background-image: url('./spotify-app-background-photo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  color: #000;
+}
+
+.container {
+  display: flex;
+  flex-direction: row; /* default: horizontal */
+  gap: 250px; /* optional spacing between components */
+}
+
+.box {
+  padding: 20px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+  flex: 1; /* make both components take equal space */
+}
