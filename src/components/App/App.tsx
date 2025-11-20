@@ -3,16 +3,18 @@ import DoneReading from '../DoneReading/DoneReading';
 import ToBeRead from '../ToBeRead/ToBeRead';
 import CurrentlyReading from '../CurrentlyReading/CurrentlyReading';
 import SearchBar from '../SearchBar/SearchBar';
+import NavBar from '../NavBar/NavBar';
 
 function App() {
   return (
     <>
-      <h1>Book Log</h1>
+      <NavBar />
+      <h1></h1>
       <SearchBar />
       <div className='container'>
-        <CurrentlyReading />
-        {/* <DoneReading /> */}
-        {/* <ToBeRead /> */}
+        {/* <CurrentlyReading />
+        <DoneReading />
+        <ToBeRead /> */}
       </div>
     </>
   )
