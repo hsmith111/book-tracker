@@ -11,8 +11,8 @@ function App() {
       <SearchBar />
       <div className='container'>
         <CurrentlyReading />
-        <DoneReading />
-        <ToBeRead />
+        {/* <DoneReading /> */}
+        {/* <ToBeRead /> */}
       </div>
     </>
   )
