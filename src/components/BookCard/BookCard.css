@@ -1,8 +1,9 @@
 .addBookButton, .removeBookButton {
-    background-color: lightgray;
-    font-weight: bold;
+    background-color: white;
+    border: black;
+    border-style:solid;
     height: 40px;
-    margin-left: 20px;
+    margin-left: 50px;
 }
 
 .BookCardInfo {
@@ -10,5 +11,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    /* text-align: left; */
+    background-color: lightgray;
+    margin: 30px;
+    padding: 0 30px;
 }

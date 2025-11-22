@@ -6,6 +6,7 @@ import CurrentlyReading from '../CurrentlyReading/CurrentlyReading';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import NavBar from '../NavBar/NavBar';
+import BookDetail from '../BookDetail/BookDetail';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <NavBar />
       <h1></h1>
       <SearchBar />
+      <BookDetail />
       <div className='container'>
         <Routes>
           <Route path="/home" element={<SearchResults />} />
