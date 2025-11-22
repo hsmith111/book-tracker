@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import './App.css'
 import DoneReading from '../DoneReading/DoneReading';
 import ToBeRead from '../ToBeRead/ToBeRead';
@@ -12,9 +13,11 @@ function App() {
       <h1></h1>
       <SearchBar />
       <div className='container'>
-        {/* <CurrentlyReading />
-        <DoneReading />
-        <ToBeRead /> */}
+        <Routes>
+          <Route path="/current" element={<CurrentlyReading />} />
+          <Route path="/done" element={<DoneReading />} />
+          <Route path="/tbr" element={<ToBeRead />} />
+        </Routes>
       </div>
     </>
   )

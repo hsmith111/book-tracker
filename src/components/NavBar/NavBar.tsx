@@ -1,13 +1,14 @@
 import './NavBar.css';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
     return (
         <>
             <nav>
                 <ul>
-                    <li>Currently Reading</li>
-                    <li>To Read</li>
-                    <li>Done</li>
+                    <li><Link to="/current">Currently Reading</Link></li>
+                    <li><Link to="/tbr">To Be Read</Link></li>
+                    <li><Link to="/done">Done</Link></li>
                 </ul>
             </nav>
         </>
