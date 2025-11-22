@@ -6,6 +6,7 @@ function NavBar() {
         <>
             <nav>
                 <ul>
+                    <li><Link to="/home">Home</Link></li>
                     <li><Link to="/current">Currently Reading</Link></li>
                     <li><Link to="/tbr">To Be Read</Link></li>
                     <li><Link to="/done">Done</Link></li>
