@@ -14,13 +14,14 @@ function App() {
       <NavBar />
       <h1></h1>
       <SearchBar />
-      <BookDetail />
+      {/* <BookDetail /> */}
       <div className='container'>
         <Routes>
           <Route path="/home" element={<SearchResults />} />
           <Route path="/current" element={<CurrentlyReading />} />
           <Route path="/done" element={<DoneReading />} />
           <Route path="/tbr" element={<ToBeRead />} />
+          <Route path="/book" element={<BookDetail />} />
         </Routes>
       </div>
     </>
