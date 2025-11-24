@@ -1,16 +1,12 @@
 import './SearchResults.css';
 import BookCard from '../BookCard/BookCard';
 
-function SearchResults() {
+function SearchResults({books}) {
     
     return (
         <div className="searchResults">
             <h2>Search Results</h2>
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
+            <BookCard books={books}/>
         </div>
     )
 }

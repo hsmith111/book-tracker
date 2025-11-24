@@ -11,15 +11,16 @@ import { useState } from 'react';
 
 function App() {
   const [bookList, setBookList] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   
   return (
     <>
       <NavBar />
       <h1></h1>
-      <SearchBar />
+      <SearchBar setSearchResults={setSearchResults} />  
       <div className='container'>
         <Routes>
-          <Route path="/home" element={<SearchResults />} />
+          <Route path="/home" element={<SearchResults books={searchResults}/>} />
           <Route path="/current" element={<CurrentlyReading />} />
           <Route path="/done" element={<DoneReading />} />
           <Route path="/tbr" element={<ToBeRead />} />

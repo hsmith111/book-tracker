@@ -1,11 +1,15 @@
 import './BookDetail.css';
 import bookCover from '../../assets/a-tree-grows-in-brooklyn.jpg';
 
-function BookDetail({ bookList, setBookList }) {
+function BookDetail({ book, bookList, setBookList }) {
 
     return (
         <div className='bookDetailCard'>
-            <img src={bookCover} className='bookImage' />
+            <img 
+                src={book.volumeInfo.imageLinks.thumbnail} 
+                alt={book.volumeInfo.title} 
+                className="bookThumbnail"
+            />
             
             <div className='bookInfo'>
                 <p>
