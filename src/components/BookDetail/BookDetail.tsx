@@ -1,11 +1,7 @@
 import './BookDetail.css';
 import bookCover from '../../assets/a-tree-grows-in-brooklyn.jpg';
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
 
-function BookDetail() {
-
-    const [bookList, setBookList] = useState("");
+function BookDetail({ bookList, setBookList }) {
 
     return (
         <div className='bookDetailCard'>
@@ -26,7 +22,7 @@ function BookDetail() {
                     Description<br />
                     URL<br />
                 </p>
-                <select className="styledSelect" value={bookList} onChange={(e) => setBookList(e.target.value)} >
+                <select className="dropdownStyle" value={bookList} onChange={(e) => setBookList(e.target.value)} >
                     <option value="">Add to a Book List...</option>
                     <option value="tbr">To Be Read</option>
                     <option value="current">Currently Reading</option>
