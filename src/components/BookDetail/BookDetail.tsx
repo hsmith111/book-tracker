@@ -1,37 +1,37 @@
 import './BookDetail.css';
-import bookCover from '../../assets/a-tree-grows-in-brooklyn.jpg';
 
 function BookDetail({ book, bookList, setBookList }) {
-
+    
     return (
         <div className='bookDetailCard'>
-            <img 
+            {book.volumeInfo.imageLinks?.thumbnail && (
+                <img 
                 src={book.volumeInfo.imageLinks.thumbnail} 
                 alt={book.volumeInfo.title} 
                 className="bookThumbnail"
             />
-            
+            )}
             <div className='bookInfo'>
                 <p>
-                    <strong>A Tree Grows in Brooklyn</strong><br />
-                    <em>Betty Smith</em><br />
+                    <strong>{book.volumeInfo.title}</strong><br />
+                    <em>{book.volumeInfo.authors?.join(', ')}</em><br />
                 </p>
             
                 <p className='bookDetails'>
-                    <strong>Details:</strong><br />
-                    528 pages<br />
-                    To Be Read<br />
-                    Rating<br />
-                    Genre<br />
-                    Description<br />
-                    URL<br />
+                    <strong>Page Count:</strong> {book.volumeInfo.pageCount} pgs<br />
+                    <strong>Avg. Rating:</strong> {book.volumeInfo.averageRating ?? 'N/A'}<br />
+                    <strong>Genre:</strong> {book.volumeInfo.categories?.join(', ') ?? 'N/A'}<br />
+                    <strong>Description:</strong> {book.volumeInfo.description ?? 'No description available.'}<br />
+                    <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">Read More on Google Books</a><br />
                 </p>
-                <select className="dropdownStyle" value={bookList} onChange={(e) => setBookList(e.target.value)} >
-                    <option value="">Add to a Book List...</option>
-                    <option value="tbr">To Be Read</option>
-                    <option value="current">Currently Reading</option>
-                    <option value="done">Done </option>
-                </select>
+                <p>
+                    <select className="dropdownStyle" value={bookList} onChange={(e) => setBookList(e.target.value)} >
+                        <option value="">Add to a Book List...</option>
+                        <option value="tbr">To Be Read</option>
+                        <option value="current">Currently Reading</option>
+                        <option value="done">Done </option>
+                    </select>
+                </p>
             </div>
         </div>
     )
