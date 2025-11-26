@@ -9,7 +9,7 @@ function BookCard({books, setSelectedBook}) {
         <div>   
             {books.map((book) => (
     <div key={book.id}>
-        <div className="BookCardInfo">
+        <div className="bookCardInfo">
             <img 
                 src={book.volumeInfo.imageLinks?.thumbnail || "/placeholder-book.png"} 
                 alt={book.volumeInfo.title} 
