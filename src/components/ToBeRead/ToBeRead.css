@@ -7,3 +7,7 @@
     height: 650px;
     overflow-y: scroll;
 }
+
+.toBeRead p {
+    margin: 20px;
+}

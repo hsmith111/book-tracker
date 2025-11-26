@@ -7,3 +7,7 @@
     height: 650px;
     overflow-y: scroll;
 }
+
+.currentlyReading p {
+    margin: 20px;
+}
