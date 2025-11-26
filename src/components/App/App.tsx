@@ -21,11 +21,11 @@ function App() {
 
       <div className='container'>
         <Routes>
-          <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook}/>} />
-          <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook}/>} />
-          <Route path="/current" element={<CurrentlyReading />} />
-          <Route path="/done" element={<DoneReading />} />
-          <Route path="/tbr" element={<ToBeRead />} />
+          <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
+          <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
+          <Route path="/current" element={<CurrentlyReading books={searchResults} setSelectedBook={setSelectedBook} />} />
+          <Route path="/done" element={<DoneReading books={searchResults} setSelectedBook={setSelectedBook} />} />
+          <Route path="/tbr" element={<ToBeRead books={searchResults} setSelectedBook={setSelectedBook} />} />
           <Route path="/book" element={<BookDetail book={selectedBook} bookList={bookList} setBookList={setBookList} />} />
         </Routes>
       </div>

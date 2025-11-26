@@ -10,9 +10,9 @@
 .BookCardInfo {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: row;
     background-color: lightgray;
-    margin: 30px;
-    padding: 0 30px;
+    margin: 20px;
+    padding: 20px;
 }

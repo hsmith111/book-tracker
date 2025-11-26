@@ -10,11 +10,11 @@ function BookCard({books, setSelectedBook}) {
             {books.map((book) => (
     <div key={book.id}>
         <div className="BookCardInfo">
-            {/* <img 
-                src={book.volumeInfo.imageLinks.thumbnail} 
+            <img 
+                src={book.volumeInfo.imageLinks?.thumbnail || "/placeholder-book.png"} 
                 alt={book.volumeInfo.title} 
                 className="bookThumbnail"
-            /> */}
+            />
             <p>
                 <strong>{book.volumeInfo.title}</strong>
                 <br />
@@ -23,7 +23,6 @@ function BookCard({books, setSelectedBook}) {
             </p>
             <button className="addBookButton" onClick={() => {setSelectedBook(book); navigate('/book');}}>See Details</button>
         </div>
-        <hr />
     </div>
 ))}
  
