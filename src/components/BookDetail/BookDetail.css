@@ -2,9 +2,9 @@
     background-color:#ffffff;
     border: 2px solid #000000;
     border-radius: 4px;
-    width: 500px;
+    width: 700px;
     margin-top: 100px;
-    height: 300px;
+    height: 400px;
     overflow-y: scroll;
     display: flex;
     gap: 15px;
@@ -12,19 +12,19 @@
 }
 
 .bookInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    font-size: 1.3em;
 }
 
 .bookDetails {
     text-align: left;
     margin-top: 10px;
+    font-size: 0.90em;
 }
 
 .bookThumbnail {
     width: auto;
     height: auto;
+    max-height: 250px;
     flex-shrink: 0;
     border: solid black 1px;
     margin-right: 30px;

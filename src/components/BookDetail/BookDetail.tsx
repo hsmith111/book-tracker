@@ -6,13 +6,13 @@ function BookDetail({ book, bookList, setBookList }) {
         <div className='bookDetailCard'>
             {book.volumeInfo.imageLinks?.thumbnail && (
                 <img 
-                src={book.volumeInfo.imageLinks.thumbnail} 
+                src={book.volumeInfo.imageLinks?.thumbnail || "/placeholder-book.png"} 
                 alt={book.volumeInfo.title} 
                 className="bookThumbnail"
             />
             )}
-            <div className='bookInfo'>
-                <p>
+            <div >
+                <p className='bookInfo'>
                     <strong>{book.volumeInfo.title}</strong><br />
                     <em>{book.volumeInfo.authors?.join(', ')}</em><br />
                 </p>
