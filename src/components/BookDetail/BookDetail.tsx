@@ -1,7 +1,15 @@
 import './BookDetail.css';
+import type { Book } from '../../types';
 
-function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading }) {
-    const handleBookListSelection = (e) => {
+interface BookDetailProps {
+    book: Book;
+    addToCurrentBooks: (book: Book) => void;
+    addToTbrBooks: (book: Book) => void;
+    addToDoneReading: (book: Book) => void;
+}
+
+function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading }: BookDetailProps) {
+    const handleBookListSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         switch (value) {
             case "current":
@@ -33,7 +41,7 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading }
             <div >
                 <p className='bookInfo'>
                     <strong>{book.volumeInfo.title}</strong><br />
-                    <em>{book.volumeInfo.authors?.join(', ')}</em><br />
+                    <em>{book.volumeInfo.authors?.join(', ') ?? 'Unknown author'}</em><br />
                 </p>
             
                 <p className='bookDetails'>

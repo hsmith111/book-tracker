@@ -1,13 +1,19 @@
 import './BookCard.css';
 import { useNavigate } from 'react-router-dom';
+import type { Book } from '../../types';
 
-function BookCard({books, setSelectedBook}) {
+interface BookCardProps {
+    books: Book[];
+    setSelectedBook: (book: Book) => void;
+}
+
+function BookCard({books, setSelectedBook}: BookCardProps) {
     
     const navigate = useNavigate();
     
     return (
         <div>   
-            {books.map((book: any) => (
+            {books.map((book) => (
     <div key={book.id}>
         <div className="bookCardInfo">
             <img 

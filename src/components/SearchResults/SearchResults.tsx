@@ -1,7 +1,7 @@
 import './SearchResults.css';
 import BookCard from '../BookCard/BookCard';
 
-function SearchResults({books, setSelectedBook}) {
+function SearchResults({books, setSelectedBook }) {
     
     return (
         <div className="searchResults">
