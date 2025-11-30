@@ -1,14 +1,14 @@
 import './DoneReading.css';
 import BookCard from '../BookCard/BookCard';
 
-function DoneReading({books, setSelectedBook}) {
+function DoneReading({books, setSelectedBook, doneReading}) {
     return (
         <div className="doneReading">
             <h2>Done</h2>
-            {books.length === 0 ? (
-                <p>No titles in your Done list yet. Enter a title in the search bar above and then add to list.</p>
+            {doneReading.length > 0 ? (
+                <BookCard books={doneReading} setSelectedBook={setSelectedBook}/>
             ) : (
-            <BookCard books={books} setSelectedBook={setSelectedBook}/>
+                <p>No titles in your Done list yet. Enter a title in the search bar above and then add to list.</p>
             )}
         </div>
     )

@@ -1,6 +1,6 @@
 import './BookDetail.css';
 
-function BookDetail({ book, addToCurrentBooks, addToTbrBooks }) {
+function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading }) {
     const handleBookListSelection = (e) => {
         const value = e.target.value;
         switch (value) {
@@ -11,6 +11,11 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks }) {
         switch (value) {
             case "tbr":
                 addToTbrBooks(book);
+                break;
+        }
+        switch (value) {
+            case "done":
+                addToDoneReading(book);
                 break;
         }
     }
