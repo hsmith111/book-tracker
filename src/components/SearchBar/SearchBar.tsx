@@ -1,12 +1,17 @@
 import './SearchBar.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { Book } from '../../types';
 
-function SearchBar({ setSearchResults }) {
+interface SearchBarProps {
+    setSearchResults: (books: Book[]) => void;
+}
+
+function SearchBar({ setSearchResults }: SearchBarProps) {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    const searchGoogleBooks = (event) => {
+    const searchGoogleBooks = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!searchTerm.trim()) {
@@ -43,7 +48,7 @@ function SearchBar({ setSearchResults }) {
     return (
         <>
             <form onSubmit={searchGoogleBooks} >
-                <input type="text" id="search" placeholder="🔍 Enter book title" onChange={e => setSearchTerm(e.target.value)} value={searchTerm} />
+                <input type="text" id="search" placeholder="🔍 Enter book title" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)} value={searchTerm} />
                 <button type="submit" className="searchButton" disabled={!searchTerm.trim()}>Search</button>
             </form>
             </>
