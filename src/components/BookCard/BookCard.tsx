@@ -7,7 +7,7 @@ function BookCard({books, setSelectedBook}) {
     
     return (
         <div>   
-            {books.map((book) => (
+            {books.map((book: any) => (
     <div key={book.id}>
         <div className="bookCardInfo">
             <img 

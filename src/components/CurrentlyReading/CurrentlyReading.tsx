@@ -1,8 +1,7 @@
 import './CurrentlyReading.css';
 import BookCard from '../BookCard/BookCard';
-// import React, { useState } from 'react';
 
-function CurrentlyReading({books, setSelectedBook, currentlyReading}) {
+function CurrentlyReading({ setSelectedBook, currentlyReading}) {
     return (
         <div className="currentlyReading">
             <h2>Currently Reading</h2>

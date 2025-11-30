@@ -7,24 +7,42 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import NavBar from '../NavBar/NavBar';
 import BookDetail from '../BookDetail/BookDetail';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [currentlyReading, setCurrentlyReading] = useState([]);
-  const [tbrBooks, setTbrBooks] = useState([]);
-  const [doneReading, setDoneReading] = useState([]);
+
+  const [currentlyReading, setCurrentlyReading] = useState<any[]>(() => {
+    const saved = localStorage.getItem('currentlyReading'); // initializes and checks local storage when component is rendered
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [tbrBooks, setTbrBooks] = useState<any[]>(() => {
+    const saved = localStorage.getItem('tbrBooks'); // initializes and checks local storage when component is rendered
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [doneReading, setDoneReading] = useState<any[]>(() => {
+    const saved = localStorage.getItem('doneReading'); // initializes and checks local storage when component is rendered
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentlyReading', JSON.stringify(currentlyReading));
+  }, [currentlyReading]); // updates local storage when user adds a book to this list
+  useEffect(() => {
+    localStorage.setItem('tbrBooks', JSON.stringify(tbrBooks));
+  }, [tbrBooks]); // updates local storage when user adds a book to this list
+  useEffect(() => {
+    localStorage.setItem('doneReading', JSON.stringify(doneReading));
+  }, [doneReading]); // updates local storage when user adds a book to this list
   
-  const addToCurrentBooks = (book) => {
+  const addToCurrentBooks = (book: any) => {
     setCurrentlyReading(currentlyReading => [...currentlyReading, book]);
   }
-  
-  const addToTbrBooks = (book) => {
-    setTbrBooks(currentlyReading => [...tbrBooks, book]);
+  const addToTbrBooks = (book: any) => {
+    setTbrBooks(tbrBooks => [...tbrBooks, book]);
   }
-  
-  const addToDoneReading = (book) => {
+  const addToDoneReading = (book: any) => {
     setDoneReading(doneReading => [...doneReading, book]);
   }
 

@@ -1,7 +1,7 @@
 import './ToBeRead.css';
 import BookCard from '../BookCard/BookCard';
 
-function ToBeRead({books, setSelectedBook, tbrBooks}) {
+function ToBeRead({ setSelectedBook, tbrBooks}) {
     return (
         <div className="toBeRead">
             <h2>To Be Read</h2>

@@ -1,7 +1,7 @@
 import './DoneReading.css';
 import BookCard from '../BookCard/BookCard';
 
-function DoneReading({books, setSelectedBook, doneReading}) {
+function DoneReading({ setSelectedBook, doneReading}) {
     return (
         <div className="doneReading">
             <h2>Done</h2>
