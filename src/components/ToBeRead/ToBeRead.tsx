@@ -1,7 +1,13 @@
 import './ToBeRead.css';
 import BookCard from '../BookCard/BookCard';
+import type { Book } from '../../types';
 
-function ToBeRead({ setSelectedBook, tbrBooks}) {
+interface ToBeReadProps {
+    tbrBooks: Book[];
+    setSelectedBook: (book: Book) => void;
+}
+
+function ToBeRead({ setSelectedBook, tbrBooks}: ToBeReadProps) {
     return (
         <div className="toBeRead">
             <h2>To Be Read</h2>

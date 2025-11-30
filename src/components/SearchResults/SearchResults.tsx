@@ -1,7 +1,13 @@
 import './SearchResults.css';
 import BookCard from '../BookCard/BookCard';
+import type { Book } from '../../types';
 
-function SearchResults({books, setSelectedBook }) {
+interface SearchResultsProps {
+    books: Book[];
+    setSelectedBook: (book: Book) => void;
+}
+
+function SearchResults({books, setSelectedBook }: SearchResultsProps) {
     
     return (
         <div className="searchResults">

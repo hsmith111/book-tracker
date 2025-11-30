@@ -1,7 +1,13 @@
 import './CurrentlyReading.css';
 import BookCard from '../BookCard/BookCard';
+import type { Book } from '../../types';
 
-function CurrentlyReading({ setSelectedBook, currentlyReading}) {
+interface CurrentlyReadingProps {
+    currentlyReading: Book[];
+    setSelectedBook: (book: Book) => void;
+}
+
+function CurrentlyReading({ setSelectedBook, currentlyReading}: CurrentlyReadingProps) {
     return (
         <div className="currentlyReading">
             <h2>Currently Reading</h2>

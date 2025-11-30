@@ -1,7 +1,13 @@
 import './DoneReading.css';
 import BookCard from '../BookCard/BookCard';
+import type { Book } from '../../types';
 
-function DoneReading({ setSelectedBook, doneReading}) {
+interface DoneReadingProps {
+    doneReading: Book[];
+    setSelectedBook: (book: Book) => void;
+}
+
+function DoneReading({ setSelectedBook, doneReading}: DoneReadingProps) {
     return (
         <div className="doneReading">
             <h2>Done</h2>
