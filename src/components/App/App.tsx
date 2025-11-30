@@ -10,13 +10,17 @@ import BookDetail from '../BookDetail/BookDetail';
 import { useState } from 'react';
 
 function App() {
-  const [bookList, setBookList] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [currentlyReading, setCurrentlyReading] = useState([]);
+  const [tbrBooks, setTbrBooks] = useState([]);
   
   const addToCurrentBooks = (book) => {
     setCurrentlyReading(currentlyReading => [...currentlyReading, book]);
+  }
+  
+  const addToTbrBooks = (book) => {
+    setTbrBooks(currentlyReading => [...tbrBooks, book]);
   }
 
   return (
@@ -31,8 +35,8 @@ function App() {
           <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
           <Route path="/current" element={<CurrentlyReading currentlyReading={currentlyReading} setSelectedBook={setSelectedBook} />} />
           <Route path="/done" element={<DoneReading books={searchResults} setSelectedBook={setSelectedBook} />} />
-          <Route path="/tbr" element={<ToBeRead books={searchResults} setSelectedBook={setSelectedBook} />} />
-          <Route path="/book" element={<BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} currentlyReading={currentlyReading} />} />
+          <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} />} />
+          <Route path="/book" element={<BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} currentlyReading={currentlyReading} />} />
         </Routes>
       </div>
     </>

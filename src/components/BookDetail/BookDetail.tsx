@@ -1,11 +1,16 @@
 import './BookDetail.css';
 
-function BookDetail({ book, addToCurrentBooks }) {
+function BookDetail({ book, addToCurrentBooks, addToTbrBooks }) {
     const handleBookListSelection = (e) => {
         const value = e.target.value;
         switch (value) {
             case "current":
                 addToCurrentBooks(book);
+                break;
+        }
+        switch (value) {
+            case "tbr":
+                addToTbrBooks(book);
                 break;
         }
     }
