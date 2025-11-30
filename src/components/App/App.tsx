@@ -13,6 +13,12 @@ function App() {
   const [bookList, setBookList] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [currentlyReading, setCurrentlyReading] = useState([]);
+  
+  const addToCurrentBooks = (book) => {
+    setCurrentlyReading(currentlyReading => [...currentlyReading, book]);
+  }
+
   return (
     <>
       <NavBar />
@@ -23,10 +29,10 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
           <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
-          <Route path="/current" element={<CurrentlyReading books={searchResults} setSelectedBook={setSelectedBook} />} />
+          <Route path="/current" element={<CurrentlyReading currentlyReading={currentlyReading} setSelectedBook={setSelectedBook} />} />
           <Route path="/done" element={<DoneReading books={searchResults} setSelectedBook={setSelectedBook} />} />
           <Route path="/tbr" element={<ToBeRead books={searchResults} setSelectedBook={setSelectedBook} />} />
-          <Route path="/book" element={<BookDetail book={selectedBook} bookList={bookList} setBookList={setBookList} />} />
+          <Route path="/book" element={<BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} currentlyReading={currentlyReading} />} />
         </Routes>
       </div>
     </>

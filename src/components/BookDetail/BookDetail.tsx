@@ -1,7 +1,16 @@
 import './BookDetail.css';
 
-function BookDetail({ book, bookList, setBookList }) {
-    
+function BookDetail({ book, addToCurrentBooks }) {
+    const handleBookListSelection = (e) => {
+        const value = e.target.value;
+        switch (value) {
+            case "current":
+                addToCurrentBooks(book);
+                break;
+        }
+    }
+
+
     return (
         <div className='bookDetailCard'>
             {book.volumeInfo.imageLinks?.thumbnail && (
@@ -25,7 +34,7 @@ function BookDetail({ book, bookList, setBookList }) {
                     <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">Read More on Google Books</a><br />
                 </p>
                 <p>
-                    <select className="dropdownStyle" value={bookList} onChange={(e) => setBookList(e.target.value)} >
+                    <select className="dropdownStyle" onChange={handleBookListSelection}>
                         <option value="">Add to a Book List...</option>
                         <option value="tbr">To Be Read</option>
                         <option value="current">Currently Reading</option>
