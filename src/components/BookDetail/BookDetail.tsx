@@ -15,13 +15,9 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading }
             case "current":
                 addToCurrentBooks(book);
                 break;
-        }
-        switch (value) {
             case "tbr":
                 addToTbrBooks(book);
                 break;
-        }
-        switch (value) {
             case "done":
                 addToDoneReading(book);
                 break;
