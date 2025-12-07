@@ -48,6 +48,10 @@ function App() {
     setDoneReading((doneReading) => [...doneReading, book]);
   }
 
+  const removeFromCurrentBooks = (book: Book) => {
+    setCurrentlyReading((currentlyReading) => (currentlyReading.filter((b) => b.id !== book.id)));
+  }
+
   return (
     <>
       <NavBar />
@@ -62,7 +66,7 @@ function App() {
           <Route path="/done" element={<DoneReading doneReading={doneReading} setSelectedBook={setSelectedBook} />} />
           <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} />} />
           <Route path="/book" element={ selectedBook ? (
-            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} />) : (<div>No book selected.</div>)} />
+            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} removeFromCurrentBooks={removeFromCurrentBooks} />) : (<div>No book selected.</div>)} />
         </Routes>
       </div>
     </>
