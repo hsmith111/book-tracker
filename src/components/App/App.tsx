@@ -51,6 +51,14 @@ function App() {
   const removeFromCurrentBooks = (book: Book) => {
     setCurrentlyReading((currentlyReading) => (currentlyReading.filter((b) => b.id !== book.id)));
   }
+  
+  const removeFromTbrBooks = (book: Book) => {
+    setTbrBooks((tbrBooks) => (tbrBooks.filter((b) => b.id !== book.id)));
+  }
+  
+  const removeFromDoneBooks = (book: Book) => {
+    setDoneReading((doneReading) => (doneReading.filter((b) => b.id !== book.id)));
+  }
 
   return (
     <>
@@ -66,7 +74,7 @@ function App() {
           <Route path="/done" element={<DoneReading doneReading={doneReading} setSelectedBook={setSelectedBook} />} />
           <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} />} />
           <Route path="/book" element={ selectedBook ? (
-            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} removeFromCurrentBooks={removeFromCurrentBooks} />) : (<div>No book selected.</div>)} />
+            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} removeFromCurrentBooks={removeFromCurrentBooks} removeFromTbrBooks={removeFromTbrBooks} removeFromDoneBooks={removeFromDoneBooks} />) : (<div>No book selected.</div>)} />
         </Routes>
       </div>
     </>

@@ -7,9 +7,11 @@ interface BookDetailProps {
     addToTbrBooks: (book: Book) => void;
     addToDoneReading: (book: Book) => void;
     removeFromCurrentBooks: (book: Book) => void;
+    removeFromTbrBooks: (book: Book) => void;
+    removeFromDoneBooks: (book: Book) => void;
 }
 
-function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, removeFromCurrentBooks }: BookDetailProps) {
+function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, removeFromCurrentBooks, removeFromTbrBooks, removeFromDoneBooks }: BookDetailProps) {
     const handleBookListSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         switch (value) {
@@ -25,8 +27,16 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, 
         }
     }
 
-    const handleRemoveBookFromList = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleRemoveBookFromCurrentlyReadingList = () => {
         removeFromCurrentBooks(book);
+    }
+    
+    const handleRemoveBookFromTbrList = (e: React.MouseEvent<HTMLButtonElement>) => {
+        removeFromTbrBooks(book);
+    }
+    
+    const handleRemoveFromDoneBooks = (e: React.MouseEvent<HTMLButtonElement>) => {
+        removeFromDoneBooks(book);
     }
 
 
@@ -60,7 +70,9 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, 
                         <option value="done">Done </option>
                     </select>
                 </p>
-                <button onClick={handleRemoveBookFromList}>X</button>
+                <button onClick={handleRemoveBookFromCurrentlyReadingList}>Remove from Currently Reading</button>
+                <button onClick={handleRemoveBookFromTbrList}>Remove from TBR</button>
+                <button onClick={handleRemoveFromDoneBooks}>Remove from Done</button>
             </div>
         </div>
     )
