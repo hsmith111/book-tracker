@@ -1,17 +1,17 @@
 import './BookDetail.css';
-import type { Book } from '../../types';
+import { useNavigate } from 'react-router-dom';
+import type { Book, BookList } from '../../types';
 
 interface BookDetailProps {
     book: Book;
+    list: BookList;
     addToCurrentBooks: (book: Book) => void;
     addToTbrBooks: (book: Book) => void;
     addToDoneReading: (book: Book) => void;
-    removeFromCurrentBooks: (book: Book) => void;
-    removeFromTbrBooks: (book: Book) => void;
-    removeFromDoneBooks: (book: Book) => void;
+    removeFromList: (book: Book, list: BookList) => void;
 }
 
-function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, removeFromCurrentBooks, removeFromTbrBooks, removeFromDoneBooks }: BookDetailProps) {
+function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, removeFromList, list }: BookDetailProps) {
     const handleBookListSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         switch (value) {
@@ -27,18 +27,21 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, 
         }
     }
 
-    const handleRemoveBookFromCurrentlyReadingList = () => {
-        removeFromCurrentBooks(book);
+    const navigate = useNavigate();
+    const handleRemoveFromList = () => {
+        removeFromList(book, list);
+        switch (list) {
+            case "current":
+                navigate("/current");
+                break;
+            case "tbr":
+                navigate("/tbr");
+                break;
+            case "done":
+                navigate("/done");
+                break;
+        }
     }
-    
-    const handleRemoveBookFromTbrList = (e: React.MouseEvent<HTMLButtonElement>) => {
-        removeFromTbrBooks(book);
-    }
-    
-    const handleRemoveFromDoneBooks = (e: React.MouseEvent<HTMLButtonElement>) => {
-        removeFromDoneBooks(book);
-    }
-
 
     return (
         <div className='bookDetailCard'>
@@ -70,9 +73,7 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, 
                         <option value="done">Done </option>
                     </select>
                 </p>
-                <button onClick={handleRemoveBookFromCurrentlyReadingList}>Remove from Currently Reading</button>
-                <button onClick={handleRemoveBookFromTbrList}>Remove from TBR</button>
-                <button onClick={handleRemoveFromDoneBooks}>Remove from Done</button>
+                <button onClick={handleRemoveFromList} disabled={list === "search"} >Remove from {list === "current" ? "Currently Reading" : list === "tbr" ? "To Be Read" : list === "done" ? "Done" : "Search Results"}</button>
             </div>
         </div>
     )

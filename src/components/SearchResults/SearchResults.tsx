@@ -1,13 +1,16 @@
 import './SearchResults.css';
 import BookCard from '../BookCard/BookCard';
-import type { Book } from '../../types';
+import type { Book, BookList } from '../../types';
 
 interface SearchResultsProps {
     books: Book[];
     setSelectedBook: (book: Book) => void;
+    setSelectedBookList: (list: BookList) => void;
+    list: BookList;
+    removeFromList: (book: Book, list: BookList) => void;
 }
 
-function SearchResults({books, setSelectedBook }: SearchResultsProps) {
+function SearchResults({books, setSelectedBook, setSelectedBookList, list, removeFromList }: SearchResultsProps) {
     
     return (
         <div className="searchResults">
@@ -15,7 +18,7 @@ function SearchResults({books, setSelectedBook }: SearchResultsProps) {
             {books.length === 0 ? (
                 <p>No search results yet. Enter a title in the search bar above.</p>
             ) : (
-            <BookCard books={books} setSelectedBook={setSelectedBook}/>
+            <BookCard books={books} setSelectedBook={(book) => {setSelectedBook(book); setSelectedBookList(list)}} list={list} removeFromList={removeFromList}/>
             )}
         </div>
     )

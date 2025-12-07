@@ -1,10 +1,12 @@
 import './BookCard.css';
 import { useNavigate } from 'react-router-dom';
-import type { Book } from '../../types';
+import type { Book, BookList } from '../../types';
 
 interface BookCardProps {
     books: Book[];
     setSelectedBook: (book: Book) => void;
+    list: BookList;
+    removeFromList: (book: Book, list: BookList) => void;
 }
 
 function BookCard({books, setSelectedBook}: BookCardProps) {

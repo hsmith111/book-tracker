@@ -8,12 +8,13 @@ import SearchResults from '../SearchResults/SearchResults';
 import NavBar from '../NavBar/NavBar';
 import BookDetail from '../BookDetail/BookDetail';
 import { useState, useEffect } from 'react';
-import type { Book } from '../../types';
+import type { Book, BookList } from '../../types';
 
 function App() {
 
   const [searchResults, setSearchResults] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [selectedBookList, setSelectedBookList] = useState<BookList | null>(null);
 
   const [currentlyReading, setCurrentlyReading] = useState<Book[]>(() => {
     const saved = localStorage.getItem('currentlyReading'); // initializes and checks local storage when component is rendered
@@ -48,17 +49,19 @@ function App() {
     setDoneReading((doneReading) => [...doneReading, book]);
   }
 
-  const removeFromCurrentBooks = (book: Book) => {
-    setCurrentlyReading((currentlyReading) => (currentlyReading.filter((b) => b.id !== book.id)));
+  const removeFromList = (book: Book, list: BookList) => {
+    switch (list) {
+      case "current":
+        setCurrentlyReading(cr => cr.filter(b => b.id !== book.id));
+        break;
+        case "tbr":
+          setTbrBooks(tbr => tbr.filter(b => b.id !== book.id));
+          break;
+          case "done":
+            setDoneReading(dr => dr.filter(b => b.id !== book.id));
+        break;
   }
-  
-  const removeFromTbrBooks = (book: Book) => {
-    setTbrBooks((tbrBooks) => (tbrBooks.filter((b) => b.id !== book.id)));
-  }
-  
-  const removeFromDoneBooks = (book: Book) => {
-    setDoneReading((doneReading) => (doneReading.filter((b) => b.id !== book.id)));
-  }
+}
 
   return (
     <>
@@ -68,13 +71,13 @@ function App() {
 
       <div className='container'>
         <Routes>
-          <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
-          <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} />} />
-          <Route path="/current" element={<CurrentlyReading currentlyReading={currentlyReading} setSelectedBook={setSelectedBook} />} />
-          <Route path="/done" element={<DoneReading doneReading={doneReading} setSelectedBook={setSelectedBook} />} />
-          <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} />} />
+          <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
+          <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
+          <Route path="/current" element={<CurrentlyReading currentlyReading={currentlyReading} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="current"/>} />
+          <Route path="/done" element={<DoneReading doneReading={doneReading} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="done" />} />
+          <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="tbr" />} />
           <Route path="/book" element={ selectedBook ? (
-            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} removeFromCurrentBooks={removeFromCurrentBooks} removeFromTbrBooks={removeFromTbrBooks} removeFromDoneBooks={removeFromDoneBooks} />) : (<div>No book selected.</div>)} />
+            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} list={selectedBookList!} removeFromList={removeFromList} />) : (<div>No book selected.</div>)} />
         </Routes>
       </div>
     </>

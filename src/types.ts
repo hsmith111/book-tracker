@@ -1,3 +1,5 @@
+export type BookList = "current" | "tbr" | "done" | "search";
+
 export interface Book {
   id: string;
   volumeInfo: {
