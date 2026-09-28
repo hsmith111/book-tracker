@@ -1,4 +1,6 @@
-To run locally: 
+To run frontend locally:\
+\
+cd frontend\
 npm run dev
 
 default: http://localhost:5173/
