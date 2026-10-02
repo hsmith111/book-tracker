@@ -41,6 +41,7 @@ function App() {
 
   useEffect(() => {
     fetch("http://localhost:8080/hello").then(response => response.text().then(response => {console.log(response)}));
+    fetch("http://localhost:8080/books").then(response => response.text().then(response => {console.log(response)}));
   });
   
   const addToCurrentBooks = (book: Book) => {
