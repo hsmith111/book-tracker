@@ -20,10 +20,10 @@ public class BookTrackerController {
         return "Hello, World!";
     }
 
-    @GetMapping("/books")
+    @GetMapping("/search")
     public ResponseEntity<String> searchForBooks(@RequestParam(defaultValue = "") String query) {
         if (query.isBlank()) {
-           return ResponseEntity.ok("harry potter");
+           return ResponseEntity.ok("test");
         } else {
             return ResponseEntity.ok().body(restClient.get()
                     .uri("https://www.googleapis.com/books/v1/volumes?q={q}&key={key}", query, apiKey)
