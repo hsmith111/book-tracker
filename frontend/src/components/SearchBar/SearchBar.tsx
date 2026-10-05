@@ -19,9 +19,10 @@ function SearchBar({ setSearchResults }: SearchBarProps) {
         return;
     }
 
+    const baseUrl = 'http://localhost:8080';
     const encodedQuery = encodeURIComponent(searchTerm);
 
-    fetch(`http://localhost:8080/search?query=${encodedQuery}`)
+    fetch(`${baseUrl}/search?query=${encodedQuery}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Google Books API error: ${response.status} ${response.statusText}`);
