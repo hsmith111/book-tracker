@@ -3,14 +3,13 @@ package com.booktracker.backend;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "books")
-public class Book {
+@Table(name = "author")
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String description;
-    private Integer seriesId;
+    private String bio;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -18,9 +17,6 @@ public class Book {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
-    public Integer getSeriesId() { return seriesId; }
-    public void setSeriesId(Integer seriesId) { this.seriesId = seriesId; }
+    public String getBio() { return bio; }
+    public void setBio(String bio) { this.bio = bio; }
 }
