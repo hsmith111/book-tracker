@@ -2,7 +2,7 @@ package com.booktracker.backend;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "edition")
@@ -12,7 +12,7 @@ public class Edition {
     private Integer id;
     private String format;
     private String publisher;
-    private Date pubDate;
+    private LocalDate pubDate;
     private Integer pageCount;
     private String isbn;
     private Integer bookId;
@@ -26,8 +26,8 @@ public class Edition {
     public String getPublisher() { return publisher; }
     public void setPublisher(String publisher) { this.publisher = publisher; }
 
-    public Date getPubDate() { return pubDate; }
-    public void setPubDate(Date pubDate) { this.pubDate = pubDate; }
+    public LocalDate getPubDate() { return pubDate; }
+    public void setPubDate(LocalDate pubDate) { this.pubDate = pubDate; }
 
     public Integer getPageCount() { return pageCount; }
     public void setPageCount(Integer pageCount) { this.pageCount = pageCount; }

@@ -8,15 +8,15 @@ import java.util.List;
 @CrossOrigin(origins = "${app.frontend.url}")
 @RestController
 public class BookTrackerController {
-    private final BookTrackerService bookTrackerService;
+    private final BookSearchService bookSearchService;
     private final BookRepository bookRepository;
     private final SeriesRepository seriesRepository;
     private final AuthorRepository authorRepository;
     private final GenreRepository genreRepository;
     private final EditionRepository editionRepository;
 
-    public BookTrackerController(BookTrackerService bookTrackerService, BookRepository bookRepository, SeriesRepository seriesRepository, AuthorRepository authorRepository, GenreRepository genreRepository, EditionRepository editionRepository) {
-        this.bookTrackerService = bookTrackerService;
+    public BookTrackerController(BookSearchService bookSearchService, BookRepository bookRepository, SeriesRepository seriesRepository, AuthorRepository authorRepository, GenreRepository genreRepository, EditionRepository editionRepository) {
+        this.bookSearchService = bookSearchService;
         this.bookRepository = bookRepository;
         this.seriesRepository = seriesRepository;
         this.authorRepository = authorRepository;
@@ -26,7 +26,7 @@ public class BookTrackerController {
 
     @GetMapping("/search")
     public ResponseEntity<String> searchForBooks(@RequestParam(defaultValue = "") String query) {
-        return ResponseEntity.ok().body(bookTrackerService.searchForBooks(query));
+        return ResponseEntity.ok().body(bookSearchService.searchForBooks(query));
     }
 
     @PostMapping("/test-book")

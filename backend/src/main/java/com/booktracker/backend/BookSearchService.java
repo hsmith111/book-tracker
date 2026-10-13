@@ -9,8 +9,8 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
 
 @Service
-public class BookTrackerService {
-    private static final Logger logger = LoggerFactory.getLogger(BookTrackerService.class);
+public class BookSearchService {
+    private static final Logger logger = LoggerFactory.getLogger(BookSearchService.class);
     private final RestClient restClient = RestClient.create();
     @Value("${app.api.key}")
     private String apiKey;
