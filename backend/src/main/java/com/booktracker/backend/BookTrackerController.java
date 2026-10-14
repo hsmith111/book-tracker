@@ -3,25 +3,15 @@ package com.booktracker.backend;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @CrossOrigin(origins = "${app.frontend.url}")
 @RestController
 public class BookTrackerController {
     private final BookSearchService bookSearchService;
-    private final BookRepository bookRepository;
-    private final SeriesRepository seriesRepository;
-    private final AuthorRepository authorRepository;
-    private final GenreRepository genreRepository;
-    private final EditionRepository editionRepository;
+    private final BookService bookService;
 
-    public BookTrackerController(BookSearchService bookSearchService, BookRepository bookRepository, SeriesRepository seriesRepository, AuthorRepository authorRepository, GenreRepository genreRepository, EditionRepository editionRepository) {
+    public BookTrackerController(BookSearchService bookSearchService, BookService bookService) {
         this.bookSearchService = bookSearchService;
-        this.bookRepository = bookRepository;
-        this.seriesRepository = seriesRepository;
-        this.authorRepository = authorRepository;
-        this.genreRepository = genreRepository;
-        this.editionRepository = editionRepository;
+        this.bookService = bookService;
     }
 
     @GetMapping("/search")
@@ -29,33 +19,7 @@ public class BookTrackerController {
         return ResponseEntity.ok().body(bookSearchService.searchForBooks(query));
     }
 
-    @PostMapping("/test-book")
-    public Book saveBook(@RequestBody Book book) { return bookRepository.save(book); }
+    @GetMapping("/books/{id}")
+    public String fetchBookById(@PathVariable String id) { return bookService.fetchBookById(id); }
 
-    @GetMapping("/test-book")
-    public List<Book> getAllBooks() { return bookRepository.findAll(); }
-
-    @PostMapping("/test-series")
-    public Series saveSeries(@RequestBody Series series) { return seriesRepository.save(series); }
-
-    @GetMapping("/test-series")
-    public List<Series> getAllSeries() { return seriesRepository.findAll(); }
-
-    @PostMapping("/test-author")
-    public Author saveAuthor(@RequestBody Author author) { return authorRepository.save(author); }
-
-    @GetMapping("/test-author")
-    public List<Author> getAllAuthors() { return authorRepository.findAll(); }
-
-    @PostMapping("/test-genre")
-    public Genre saveGenre(@RequestBody Genre genre) { return genreRepository.save(genre); }
-
-    @GetMapping("/test-genre")
-    public List<Genre> getAllGenres() { return genreRepository.findAll(); }
-
-    @PostMapping("/test-edition")
-    public Edition saveEdition(@RequestBody Edition edition) { return editionRepository.save(edition); }
-
-    @GetMapping("/test-edition")
-    public List<Edition> getAllEditions() { return editionRepository.findAll(); }
 }
