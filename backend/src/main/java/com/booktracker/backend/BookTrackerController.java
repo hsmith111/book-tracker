@@ -20,6 +20,6 @@ public class BookTrackerController {
     }
 
     @GetMapping("/books/{id}")
-    public String fetchBookById(@PathVariable String id) { return bookService.fetchBookById(id); }
+    public GoogleBookResponse fetchBookById(@PathVariable String id) { return bookService.fetchBookById(id); }
 
 }

@@ -15,12 +15,12 @@ public class BookService {
     @Value("${app.api.key}")
     private String apiKey;
 
-    public String fetchBookById(String id) {
+    public GoogleBookResponse fetchBookById(String id) {
         try {
             return restClient.get()
                     .uri("https://www.googleapis.com/books/v1/volumes/{id}?key={key}", id, apiKey)
                     .retrieve()
-                    .body(String.class);
+                    .body(GoogleBookResponse.class);
         } catch (RestClientResponseException e) {
             logger.error("Error from Google: {}", e.getStatusCode());
             throw e;
