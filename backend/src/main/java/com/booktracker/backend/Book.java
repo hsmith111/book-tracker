@@ -3,6 +3,7 @@ package com.booktracker.backend;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
