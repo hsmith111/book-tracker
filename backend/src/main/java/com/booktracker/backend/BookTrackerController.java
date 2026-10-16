@@ -22,4 +22,9 @@ public class BookTrackerController {
     @GetMapping("/books/{id}")
     public GoogleBookResponse fetchBookById(@PathVariable String id) { return bookService.fetchBookById(id); }
 
+    @PostMapping("/books")
+    public ResponseEntity<Book> saveBook(@RequestBody SaveBookRequest request) {
+        return ResponseEntity.ok().body(bookService.saveBook(request));
+    }
+
 }
