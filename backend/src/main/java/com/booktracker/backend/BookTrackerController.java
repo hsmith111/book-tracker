@@ -24,7 +24,8 @@ public class BookTrackerController {
 
     @PostMapping("/books")
     public ResponseEntity<Book> saveBook(@RequestBody SaveBookRequest request) {
-        return ResponseEntity.ok().body(bookService.saveBook(request));
+        GoogleBookResponse googleBook = bookService.fetchBookById(request.googleId());
+        return ResponseEntity.ok().body(bookService.saveBook(request, googleBook));
     }
 
 }

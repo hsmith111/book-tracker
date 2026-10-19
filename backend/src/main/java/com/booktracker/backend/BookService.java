@@ -50,7 +50,7 @@ public class BookService {
     }
 
     @Transactional
-    public Book saveBook(SaveBookRequest request) {
+    public Book saveBook(SaveBookRequest request, GoogleBookResponse googleBook) {
         validateReadingList(request);
 
         Optional<Book> requestedBook = bookRepository.findByGoogleId(request.googleId());
@@ -63,7 +63,6 @@ public class BookService {
             return bookRepository.save(existingBook);
         }
 
-        GoogleBookResponse googleBook = fetchBookById(request.googleId());
         Book newBook = createBook(request, googleBook);
 
         Book savedBook = bookRepository.save(newBook);
