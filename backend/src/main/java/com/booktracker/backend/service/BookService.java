@@ -1,5 +1,7 @@
-package com.booktracker.backend;
+package com.booktracker.backend.service;
 
+import com.booktracker.backend.model.*;
+import com.booktracker.backend.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

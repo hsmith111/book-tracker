@@ -1,4 +1,4 @@
-package com.booktracker.backend;
+package com.booktracker.backend.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

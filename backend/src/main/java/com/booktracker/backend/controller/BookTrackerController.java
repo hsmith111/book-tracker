@@ -1,5 +1,10 @@
-package com.booktracker.backend;
+package com.booktracker.backend.controller;
 
+import com.booktracker.backend.model.Book;
+import com.booktracker.backend.model.GoogleBookResponse;
+import com.booktracker.backend.model.SaveBookRequest;
+import com.booktracker.backend.service.BookSearchService;
+import com.booktracker.backend.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

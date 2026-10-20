@@ -1,9 +1,8 @@
-package com.booktracker.backend;
+package com.booktracker.backend.model;
 
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Entity

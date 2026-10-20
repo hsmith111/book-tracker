@@ -1,4 +1,4 @@
-package com.booktracker.backend;
+package com.booktracker.backend.controller;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

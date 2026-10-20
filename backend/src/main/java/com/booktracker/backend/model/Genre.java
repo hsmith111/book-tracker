@@ -1,10 +1,10 @@
-package com.booktracker.backend;
+package com.booktracker.backend.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "reading_list")
-public class ReadingList {
+@Table(name = "genre")
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

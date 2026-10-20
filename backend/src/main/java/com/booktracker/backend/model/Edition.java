@@ -1,4 +1,4 @@
-package com.booktracker.backend;
+package com.booktracker.backend.model;
 
 import jakarta.persistence.*;
 
