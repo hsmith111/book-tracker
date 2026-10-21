@@ -13,7 +13,6 @@ public record GoogleBookResponse(
             ImageLinks imageLinks,
             String infoLink,
             Integer pageCount,
-            String publishedDate,
             String title,
             String publisher
     ) {

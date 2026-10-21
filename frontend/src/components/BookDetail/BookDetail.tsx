@@ -59,10 +59,13 @@ function BookDetail({ book, addToCurrentBooks, addToTbrBooks, addToDoneReading, 
                 </p>
             
                 <p className='bookDetails'>
-                    <strong>Page Count:</strong> {book.volumeInfo.pageCount} pgs<br />
-                    <strong>Avg. Rating:</strong> {book.volumeInfo.averageRating ?? 'N/A'}<br />
+                    <strong>Page Count:</strong> {book.volumeInfo.pageCount ? `${book.volumeInfo.pageCount} pgs` : 'N/A'}<br />
+                    {book.volumeInfo.averageRating != null && (
+                        <><strong>Avg. Rating:</strong> {book.volumeInfo.averageRating}<br /></>
+                    )}
                     <strong>Genre:</strong> {book.volumeInfo.categories?.join(', ') ?? 'N/A'}<br />
                     <strong>Description:</strong> {book.volumeInfo.description ?? 'No description available.'}<br />
+                    <strong>Publisher:</strong> {book.volumeInfo.publisher ?? 'No publisher info available.'}<br />
                     <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">Read More on Google Books</a><br />
                 </p>
                 <p>

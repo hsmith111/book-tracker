@@ -1,6 +1,7 @@
 package com.booktracker.backend.service;
 
 import com.booktracker.backend.model.*;
+import com.booktracker.backend.model.BookResponse.VolumeInfo.*;
 import com.booktracker.backend.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +12,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookService {
@@ -52,17 +50,17 @@ public class BookService {
     }
 
     @Transactional
-    public Book saveBook(SaveBookRequest request, GoogleBookResponse googleBook) {
+    public BookResponse saveBook(SaveBookRequest request, GoogleBookResponse googleBook) {
         validateReadingList(request);
 
         Optional<Book> requestedBook = bookRepository.findByGoogleId(request.googleId());
         if (requestedBook.isPresent()) {
             Book existingBook = requestedBook.get();
             if (Objects.equals(existingBook.getReadingListId(), request.readingListId())) {
-                return existingBook;
+                return toBookResponse(existingBook);
             }
             existingBook.setReadingListId(request.readingListId());
-            return bookRepository.save(existingBook);
+            return toBookResponse(bookRepository.save(existingBook));
         }
 
         Book newBook = createBook(request, googleBook);
@@ -71,7 +69,7 @@ public class BookService {
 
         saveEdition(savedBook, googleBook);
 
-        return savedBook;
+        return toBookResponse(savedBook);
     }
 
     private void validateReadingList(SaveBookRequest request) {
@@ -141,5 +139,22 @@ public class BookService {
         newEdition.setPublisher(googleBook.volumeInfo().publisher());
         newEdition.setPageCount(googleBook.volumeInfo().pageCount());
         editionRepository.save(newEdition);
+    }
+
+    private BookResponse toBookResponse(Book book) {
+        Edition edition = editionRepository.findByBookId(book.getId()).orElse(null);
+        ImageLinks imageLinks = new ImageLinks(book.getThumbnailUrl());
+        List<String> authors = book.getAuthors()
+                .stream()
+                .map(Author::getName)
+                .toList();
+        List<String> genres = book.getGenres()
+                .stream()
+                .map(Genre::getName)
+                .toList();
+        String publisher = edition != null ? edition.getPublisher() : null;
+        Integer pageCount = edition != null ? edition.getPageCount() : null;
+        BookResponse.VolumeInfo volumeInfo = new BookResponse.VolumeInfo(authors, genres, book.getDescription(), imageLinks, book.getInfoLink(), pageCount, book.getName(), publisher);
+        return new BookResponse(book.getGoogleId(), book.getReadingListId(), volumeInfo);
     }
 }

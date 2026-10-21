@@ -1,6 +1,6 @@
 package com.booktracker.backend.controller;
 
-import com.booktracker.backend.model.Book;
+import com.booktracker.backend.model.BookResponse;
 import com.booktracker.backend.model.GoogleBookResponse;
 import com.booktracker.backend.model.SaveBookRequest;
 import com.booktracker.backend.service.BookSearchService;
@@ -28,7 +28,7 @@ public class BookTrackerController {
     public GoogleBookResponse fetchBookById(@PathVariable String id) { return bookService.fetchBookById(id); }
 
     @PostMapping("/books")
-    public ResponseEntity<Book> saveBook(@RequestBody SaveBookRequest request) {
+    public ResponseEntity<BookResponse> saveBook(@RequestBody SaveBookRequest request) {
         GoogleBookResponse googleBook = bookService.fetchBookById(request.googleId());
         return ResponseEntity.ok().body(bookService.saveBook(request, googleBook));
     }

@@ -2,6 +2,7 @@ export type BookList = "current" | "tbr" | "done" | "search";
 
 export interface Book {
   id: string;
+  readingListId?: number;
   volumeInfo: {
     title: string;
     imageLinks?: {
@@ -9,10 +10,11 @@ export interface Book {
       thumbnail?: string;
     }
     authors?: string[];
-    pageCount?: string;
-    averageRating?: string;
+    pageCount?: number;
+    averageRating?: number;
     categories?: string[];
     description?: string;
     infoLink?: string;
+    publisher?: string;
   }
 }
