@@ -58,6 +58,18 @@ public class BookService {
     }
 
     @Transactional
+    public void removeBookFromReadingList(Integer readingListId, String googleId) {
+        Optional<Book> book = bookRepository.findByGoogleId(googleId);
+        if (book.isPresent()) {
+            Book existingBook = book.get();
+            if (Objects.equals(existingBook.getReadingListId(), readingListId)) {
+                existingBook.setReadingListId(null);
+                bookRepository.save(existingBook);
+            }
+        }
+    }
+
+    @Transactional
     public BookResponse saveBook(SaveBookRequest request, GoogleBookResponse googleBook) {
         validateReadingList(request);
 

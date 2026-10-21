@@ -40,4 +40,9 @@ public class BookTrackerController {
         return bookService.getBooksByReadingListId(readingListId);
     }
 
+    @DeleteMapping("/reading-lists/{readingListId}/books/{googleId}")
+    public ResponseEntity<Void> removeBookFromReadingList(@PathVariable Integer readingListId, @PathVariable String googleId) {
+        bookService.removeBookFromReadingList(readingListId, googleId);
+        return ResponseEntity.noContent().build();
+    }
 }
