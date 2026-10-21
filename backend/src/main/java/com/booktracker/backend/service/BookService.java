@@ -49,6 +49,14 @@ public class BookService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public List<BookResponse> getBooksByReadingListId(Integer readingListId) {
+        return bookRepository.findByReadingListId(readingListId)
+                .stream()
+                .map(this::toBookResponse)
+                .toList();
+    }
+
     @Transactional
     public BookResponse saveBook(SaveBookRequest request, GoogleBookResponse googleBook) {
         validateReadingList(request);

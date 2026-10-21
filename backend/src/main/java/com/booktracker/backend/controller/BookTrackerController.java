@@ -8,6 +8,8 @@ import com.booktracker.backend.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "${app.frontend.url}")
 @RestController
 public class BookTrackerController {
@@ -31,6 +33,11 @@ public class BookTrackerController {
     public ResponseEntity<BookResponse> saveBook(@RequestBody SaveBookRequest request) {
         GoogleBookResponse googleBook = bookService.fetchBookById(request.googleId());
         return ResponseEntity.ok().body(bookService.saveBook(request, googleBook));
+    }
+
+    @GetMapping("/reading-lists/{readingListId}/books")
+    public List<BookResponse> getBooksByReadingListId(@PathVariable Integer readingListId) {
+        return bookService.getBooksByReadingListId(readingListId);
     }
 
 }
