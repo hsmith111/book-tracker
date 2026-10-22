@@ -74,8 +74,8 @@ function App() {
           <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
           <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
           <Route path="/current" element={<CurrentlyReading setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
-          <Route path="/done" element={<DoneReading doneReading={doneReading} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="done" />} />
-          <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="tbr" />} />
+          <Route path="/done" element={<DoneReading setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
+          <Route path="/tbr" element={<ToBeRead setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
           <Route path="/book" element={ selectedBook ? (
             <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} list={selectedBookList!} removeFromList={removeFromList} />) : (<div>No book selected.</div>)} />
         </Routes>
