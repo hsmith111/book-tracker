@@ -10,7 +10,7 @@ interface SearchResultsProps {
     removeFromList: (book: Book, list: BookList) => void;
 }
 
-function SearchResults({books, setSelectedBook, setSelectedBookList, list, removeFromList }: SearchResultsProps) {
+function SearchResults({books, setSelectedBook, setSelectedBookList, list }: SearchResultsProps) {
     
     return (
         <div className="searchResults">
@@ -18,7 +18,7 @@ function SearchResults({books, setSelectedBook, setSelectedBookList, list, remov
             {books.length === 0 ? (
                 <p>No search results yet. Enter a title in the search bar above.</p>
             ) : (
-            <BookCard books={books} setSelectedBook={(book) => {setSelectedBook(book); setSelectedBookList(list)}} list={list} removeFromList={removeFromList}/>
+            <BookCard books={books} setSelectedBook={(book) => {setSelectedBook(book); setSelectedBookList(list)}}/>
             )}
         </div>
     )

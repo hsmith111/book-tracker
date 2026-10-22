@@ -1,26 +1,47 @@
 import './CurrentlyReading.css';
 import BookCard from '../BookCard/BookCard';
-import type { Book, BookList } from '../../types';
+import type { Book } from '../../types';
+import { getBooks } from '../../api';
+import { useState, useEffect } from 'react';
 
 interface CurrentlyReadingProps {
-    currentlyReading: Book[];
     setSelectedBook: (book: Book) => void;
-    setSelectedBookList: (list: BookList) => void;
-    list: BookList;
-    removeFromList: (book: Book, list: BookList) => void;
+    setSelectedBookList: (list: "current") => void;
 }
 
-function CurrentlyReading({ setSelectedBook, setSelectedBookList, currentlyReading, list, removeFromList}: CurrentlyReadingProps) {
+function CurrentlyReading({ setSelectedBook, setSelectedBookList}: CurrentlyReadingProps) {
+
+    const [currentlyReading, setCurrentlyReading] = useState<Book[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        getBooks("current")
+            .then(setCurrentlyReading)
+            .catch(err => {
+                console.error("Error occurred: ", err);
+                setError(true);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <div className="currentlyReading">
             <h2>Currently Reading</h2>
-            {currentlyReading.length > 0 ? (
-                <BookCard books={currentlyReading} setSelectedBook={(book) => {setSelectedBook(book); setSelectedBookList(list)}} list={list} removeFromList={removeFromList}/>
-            ) : (
-            <p>No titles in your Currently Reading yet. Enter a title in the search bar above and then add to list.</p>
+            {loading && <p>List is loading...</p>}
+            {error && <p>Could not load list.</p>}
+            {!loading && !error && currentlyReading.length > 0 && (
+                <BookCard books={currentlyReading} setSelectedBook={(book) => {
+                    setSelectedBook(book);
+                    setSelectedBookList("current");
+                }}/>
             )}
+            {!loading && !error && currentlyReading.length === 0 && (
+                <p>No titles in your Currently Reading yet. Enter a title in the search bar above and then add to list.</p>
+                )}
         </div>
-    )
-}
+    )}
 
 export default CurrentlyReading;

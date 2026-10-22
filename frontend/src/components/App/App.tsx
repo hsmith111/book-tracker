@@ -73,7 +73,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
           <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
-          <Route path="/current" element={<CurrentlyReading currentlyReading={currentlyReading} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="current"/>} />
+          <Route path="/current" element={<CurrentlyReading setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
           <Route path="/done" element={<DoneReading doneReading={doneReading} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="done" />} />
           <Route path="/tbr" element={<ToBeRead tbrBooks={tbrBooks} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="tbr" />} />
           <Route path="/book" element={ selectedBook ? (
