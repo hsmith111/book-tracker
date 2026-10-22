@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('doneReading', JSON.stringify(doneReading));
   }, [doneReading]); // updates local storage when user adds a book to this list
-  
+
   const addToCurrentBooks = (book: Book) => {
     setCurrentlyReading((currentlyReading) => [...currentlyReading, book]);
   }

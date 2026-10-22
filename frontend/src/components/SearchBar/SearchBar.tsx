@@ -2,6 +2,7 @@ import './SearchBar.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Book } from '../../types';
+import { baseUrl } from '../../api';
 
 interface SearchBarProps {
     setSearchResults: (books: Book[]) => void;
@@ -19,7 +20,6 @@ function SearchBar({ setSearchResults }: SearchBarProps) {
         return;
     }
 
-    const baseUrl = 'http://localhost:8080';
     const encodedQuery = encodeURIComponent(searchTerm);
 
     fetch(`${baseUrl}/search?query=${encodedQuery}`)
