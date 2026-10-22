@@ -1,22 +1,40 @@
 import './ToBeRead.css';
 import BookCard from '../BookCard/BookCard';
-import type { Book, BookList } from '../../types';
+import type { Book } from '../../types';
+import {getBooks} from "../../api";
+import { useState, useEffect } from 'react';
 
 interface ToBeReadProps {
-    tbrBooks: Book[];
     setSelectedBook: (book: Book) => void;
-    setSelectedBookList: (list: BookList) => void;
-    list: BookList;
-    removeFromList: (book: Book, list: BookList) => void;
+    setSelectedBookList: (list: "tbr") => void;
 }
 
-function ToBeRead({ setSelectedBook, setSelectedBookList, tbrBooks, list, removeFromList}: ToBeReadProps) {
+function ToBeRead({ setSelectedBook, setSelectedBookList }: ToBeReadProps) {
+    const [tbrBooks, setTbrBooks] = useState<Book[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        getBooks("tbr")
+            .then(setTbrBooks)
+            .catch(err => {
+                console.error("Error occurred: ", err);
+                setError(true);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <div className="toBeRead">
             <h2>To Be Read</h2>
-            {tbrBooks.length > 0 ? (
-                <BookCard books={tbrBooks} setSelectedBook={(book) => {setSelectedBook(book); setSelectedBookList(list)}} list={list} removeFromList={removeFromList}/>
-            ) : (
+            {loading && <p>List is loading...</p>}
+            {error && <p>Could not load list.</p>}
+            {!loading && !error && tbrBooks.length > 0 && (
+                <BookCard books={tbrBooks} setSelectedBook={(book) => {setSelectedBook(book); setSelectedBookList("tbr")}} />
+            )}
+            {!loading && !error && tbrBooks.length === 0 && (
                 <p>No titles in your TBR list yet. Enter a title in the search bar above and then add to list.</p>
             )}
         </div>

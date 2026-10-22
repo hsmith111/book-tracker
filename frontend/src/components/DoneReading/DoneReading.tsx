@@ -1,12 +1,12 @@
 import './DoneReading.css';
 import BookCard from '../BookCard/BookCard';
-import type { Book, BookList } from '../../types';
+import type { Book } from '../../types';
 import {getBooks} from "../../api";
 import { useState, useEffect } from 'react';
 
 interface DoneReadingProps {
     setSelectedBook: (book: Book) => void;
-    setSelectedBookList: (list: BookList) => void;
+    setSelectedBookList: (list: "done") => void;
 }
 
 function DoneReading({ setSelectedBook, setSelectedBookList}: DoneReadingProps) {

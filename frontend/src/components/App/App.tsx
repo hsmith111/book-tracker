@@ -54,14 +54,14 @@ function App() {
       case "current":
         setCurrentlyReading(cr => cr.filter(b => b.id !== book.id));
         break;
-        case "tbr":
-          setTbrBooks(tbr => tbr.filter(b => b.id !== book.id));
-          break;
-          case "done":
-            setDoneReading(dr => dr.filter(b => b.id !== book.id));
+      case "tbr":
+        setTbrBooks(tbr => tbr.filter(b => b.id !== book.id));
         break;
+      case "done":
+        setDoneReading(dr => dr.filter(b => b.id !== book.id));
+        break;
+    }
   }
-}
 
   return (
     <>
