@@ -23,9 +23,10 @@ function SearchBar({ setSearchResults }: SearchBarProps) {
     const encodedQuery = encodeURIComponent(searchTerm);
 
     fetch(`${baseUrl}/search?query=${encodedQuery}`)
-    .then(response => {
+    .then(async response => {
         if (!response.ok) {
-            throw new Error(`Google Books API error: ${response.status} ${response.statusText}`);
+            const message = await response.text();
+            throw new Error(message || `Search failed: ${response.status}`);
         }
         return response.json();
     })
@@ -41,8 +42,8 @@ function SearchBar({ setSearchResults }: SearchBarProps) {
         }
     })
     .catch(error => {
-        console.error("Google Books search failed:", error);
-        alert("Failed to fetch books. Please try again.");
+        console.error("Book search failed:", error);
+        alert(error.message);
     });
 };
     return (
