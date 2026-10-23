@@ -7,7 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import NavBar from '../NavBar/NavBar';
 import BookDetail from '../BookDetail/BookDetail';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Book, BookList } from '../../types';
 
 function App() {
@@ -15,53 +15,6 @@ function App() {
   const [searchResults, setSearchResults] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedBookList, setSelectedBookList] = useState<BookList | null>(null);
-
-  const [currentlyReading, setCurrentlyReading] = useState<Book[]>(() => {
-    const saved = localStorage.getItem('currentlyReading'); // initializes and checks local storage when component is rendered
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [tbrBooks, setTbrBooks] = useState<Book[]>(() => {
-    const saved = localStorage.getItem('tbrBooks'); // initializes and checks local storage when component is rendered
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [doneReading, setDoneReading] = useState<Book[]>(() => {
-    const saved = localStorage.getItem('doneReading'); // initializes and checks local storage when component is rendered
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem('currentlyReading', JSON.stringify(currentlyReading));
-  }, [currentlyReading]); // updates local storage when user adds a book to this list
-  useEffect(() => {
-    localStorage.setItem('tbrBooks', JSON.stringify(tbrBooks));
-  }, [tbrBooks]); // updates local storage when user adds a book to this list
-  useEffect(() => {
-    localStorage.setItem('doneReading', JSON.stringify(doneReading));
-  }, [doneReading]); // updates local storage when user adds a book to this list
-
-  const addToCurrentBooks = (book: Book) => {
-    setCurrentlyReading((currentlyReading) => [...currentlyReading, book]);
-  }
-  const addToTbrBooks = (book: Book) => {
-    setTbrBooks((tbrBooks) => [...tbrBooks, book]);
-  }
-  const addToDoneReading = (book: Book) => {
-    setDoneReading((doneReading) => [...doneReading, book]);
-  }
-
-  const removeFromList = (book: Book, list: BookList) => {
-    switch (list) {
-      case "current":
-        setCurrentlyReading(cr => cr.filter(b => b.id !== book.id));
-        break;
-      case "tbr":
-        setTbrBooks(tbr => tbr.filter(b => b.id !== book.id));
-        break;
-      case "done":
-        setDoneReading(dr => dr.filter(b => b.id !== book.id));
-        break;
-    }
-  }
 
   return (
     <>
@@ -71,13 +24,13 @@ function App() {
 
       <div className='container'>
         <Routes>
-          <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
-          <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} removeFromList={removeFromList} list="search" />} />
+          <Route path="/" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} list="search" />} />
+          <Route path="/home" element={<SearchResults books={searchResults} setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} list="search" />} />
           <Route path="/current" element={<CurrentlyReading setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
           <Route path="/done" element={<DoneReading setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
           <Route path="/tbr" element={<ToBeRead setSelectedBook={setSelectedBook} setSelectedBookList={setSelectedBookList} />} />
           <Route path="/book" element={ selectedBook ? (
-            <BookDetail book={selectedBook} addToCurrentBooks={addToCurrentBooks} addToTbrBooks={addToTbrBooks} addToDoneReading={addToDoneReading} list={selectedBookList!} removeFromList={removeFromList} />) : (<div>No book selected.</div>)} />
+            <BookDetail book={selectedBook} list={selectedBookList!} />) : (<div>No book selected.</div>)} />
         </Routes>
       </div>
     </>

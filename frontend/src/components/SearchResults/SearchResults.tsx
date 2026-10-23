@@ -7,7 +7,6 @@ interface SearchResultsProps {
     setSelectedBook: (book: Book) => void;
     setSelectedBookList: (list: BookList) => void;
     list: BookList;
-    removeFromList: (book: Book, list: BookList) => void;
 }
 
 function SearchResults({books, setSelectedBook, setSelectedBookList, list }: SearchResultsProps) {
