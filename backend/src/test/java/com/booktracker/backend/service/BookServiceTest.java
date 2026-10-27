@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +29,7 @@ public class BookServiceTest {
 
     @Test
     void returnsEmptyListWhenReadingListHasNoBooks() {
-        when(bookRepository.findByReadingListId(4)).thenReturn(List.of());
+        when(bookRepository.findByReadingListId(Mockito.anyInt())).thenReturn(List.of());
         List<BookResponse> result = bookService.getBooksByReadingListId(4);
         assertThat(result).isEmpty();
     }
@@ -48,13 +50,26 @@ public class BookServiceTest {
         when(bookRepository.findByReadingListId(5)).thenReturn(List.of(book));
         when(editionRepository.findByBookId(1234)).thenReturn(Optional.of(edition));
 
+        List<BookResponse> expected = List.of(
+                new BookResponse(
+                        "zxcv1234",
+                        5,
+                        new BookResponse.VolumeInfo(
+                                Collections.emptyList(),
+                                Collections.emptyList(),
+                                null,
+                                new BookResponse.VolumeInfo.ImageLinks(null),
+                                null,
+                                497,
+                                "Mock Book for Dummies",
+                                "Random House"
+                        ))
+        );
+
+        // Act
+
         List<BookResponse> result = bookService.getBooksByReadingListId(5);
-        assertThat(result).hasSize(1);
-        BookResponse bookInfo = result.get(0);
-        assertThat(bookInfo.id()).isEqualTo("zxcv1234");
-        assertThat(bookInfo.readingListId()).isEqualTo(5);
-        assertThat(bookInfo.volumeInfo().title()).isEqualTo("Mock Book for Dummies");
-        assertThat(bookInfo.volumeInfo().publisher()).isEqualTo("Random House");
-        assertThat(bookInfo.volumeInfo().pageCount()).isEqualTo(497);
+        // Assert
+        assertThat(result).usingRecursiveComparison().isEqualTo(expected);
     }
 }
